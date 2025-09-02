@@ -1,0 +1,9 @@
+document.querySelector('#exampleInputName').value;
+document.querySelector('#exampleInputGenderM').value;
+document.querySelector('#exampleInputGenderF').value;
+document.querySelector('#exampleInputBirth').value;
+document.querySelector('#exampleInputCountry').value;
+document.querySelector('#exampleInputEmail1').value;
+document.querySelector('#exampleInputPassword1').value;
+document.querySelector('#exampleInputFile').value;
+document.querySelector('#exampleInputAdmin').value;
