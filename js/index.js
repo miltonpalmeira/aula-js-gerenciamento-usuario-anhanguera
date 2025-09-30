@@ -1,27 +1,41 @@
 let fields = document.querySelectorAll('#form-user-create [name]');
 
-let json = {};
+document.querySelector('#save').addEventListener('click', (event) => {
+  event.preventDefault();
 
-fields.forEach(function(field, index){
+  let json = {};
+
+  fields.forEach(function (field, index) {
     if (field.name == 'gender') {
-        if (field.checked) {
-            json[field.name] = field.value;
-        }
-    }
-    else if (field.name == 'admin') {
-        if (field.checked) {
-            json[field.name] = "Sim";
-        }
-        else {
-            json[field.name] = "Não";
-        }
-    }
-    else {
+      if (field.checked) {
         json[field.name] = field.value;
+      }
+    } else if (field.name == 'admin') {
+      if (field.checked) {
+        json[field.name] = 'Sim';
+      } else {
+        json[field.name] = 'Não';
+      }
+    } else {
+      json[field.name] = field.value;
     }
+  });
+
+  let tr = document.createElement('tr');
+  tr.innerHTML = `
+    <td>FOTO</td>
+    <td>${json.name}</td>
+    <td>${json.email}</td>
+    <td>${json.admin}</td>
+    <td>${new Date().toLocaleDateString()}</td>
+    <td>Ações</td>
+  `;
+
+  document.querySelector('#table-users').appendChild(tr);
 });
 
-console.log(json);
+// GET: CONSULTA
+// POST: INSERÇÃO - por baixo dos panos
 
 // let name = document.querySelector('#exampleInputName').value;
 // let gender = document.querySelector('input[type=radio]:checked').value;
