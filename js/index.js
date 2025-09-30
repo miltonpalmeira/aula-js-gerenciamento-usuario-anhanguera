@@ -3,7 +3,7 @@ let fields = document.querySelectorAll('#form-user-create [name]');
 document.querySelector('#save').addEventListener('click', (event) => {
   event.preventDefault();
 
-  let json = {};
+  let json = { };
 
   fields.forEach(function (field, index) {
     if (field.name == 'gender') {
@@ -28,7 +28,16 @@ document.querySelector('#save').addEventListener('click', (event) => {
     <td>${json.email}</td>
     <td>${json.admin}</td>
     <td>${new Date().toLocaleDateString()}</td>
-    <td>Ações</td>
+    <td>
+      <button type="button" 
+        class="btn btn-primary btn-edit btn-xs btn-flat">
+        Editar
+      </button>
+      <button type="button" 
+        class="btn btn-danger btn-delete btn-xs btn-flat">
+        Excluir
+      </button>
+    </td>
   `;
 
   document.querySelector('#table-users').appendChild(tr);
