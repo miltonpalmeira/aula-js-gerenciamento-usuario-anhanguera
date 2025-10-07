@@ -23,7 +23,10 @@ document.querySelector('#save').addEventListener('click', (event) => {
 
   let tr = document.createElement('tr');
   tr.innerHTML = `
-    <td>FOTO</td>
+    <td>
+      <img src="${json.photo || 'dist/img/user2-160x160.jpg'}" 
+      alt="Imagem do Usuário" class="img-sm img-circle">
+    </td>
     <td>${json.name}</td>
     <td>${json.email}</td>
     <td>${json.admin}</td>
@@ -41,6 +44,8 @@ document.querySelector('#save').addEventListener('click', (event) => {
   `;
 
   document.querySelector('#table-users').appendChild(tr);
+
+  document.querySelector('#form-user-create').reset();
 });
 
 // GET: CONSULTA
