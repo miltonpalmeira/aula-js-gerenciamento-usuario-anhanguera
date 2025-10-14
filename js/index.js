@@ -1,3 +1,5 @@
+let formEl = document.querySelector('#form-user-create');
+
 let fields = document.querySelectorAll('#form-user-create [name]');
 
 document.querySelector('#save').addEventListener('click', (event) => {
@@ -21,6 +23,15 @@ document.querySelector('#save').addEventListener('click', (event) => {
     }
   });
 
+  getPhoto(formEl).then((photo) => {
+    json.photo = photo;
+    addLine(json);
+  });
+
+  formEl.reset();
+});
+
+function addLine(json) {
   let tr = document.createElement('tr');
   tr.innerHTML = `
     <td>
@@ -44,9 +55,31 @@ document.querySelector('#save').addEventListener('click', (event) => {
   `;
 
   document.querySelector('#table-users').appendChild(tr);
+}
 
-  document.querySelector('#form-user-create').reset();
-});
+function getPhoto(formEl) {
+  return new Promise((resolve, reject) => {
+    let fileReader = new FileReader();
+    let elements = [...formEl.elements].filter(item => {
+      if (item.name === 'photo') {
+        return item;
+      }
+    });
+    let file = elements[0].files[0];
+    fileReader.onload = () => {
+      resolve(fileReader.result);
+    }
+    fileReader.onerror = (e) => {
+      reject(e);
+    }
+
+    if (file) {
+      fileReader.readAsDataURL(file);
+    } else {
+      resolve('dist/img/user2-160x160.jpg');
+    }
+  });
+}
 
 // GET: CONSULTA
 // POST: INSERÇÃO - por baixo dos panos
