@@ -26,6 +26,8 @@ document.querySelector('#save').addEventListener('click', (event) => {
   getPhoto(formEl).then((photo) => {
     json.photo = photo;
     addLine(json);
+
+    localStorage.setItem('users', JSON.stringify(json));
   });
 
   formEl.reset();
@@ -55,6 +57,23 @@ function addLine(json) {
   `;
 
   document.querySelector('#table-users').appendChild(tr);
+  updateCount();
+}
+
+function updateCount() {
+  let numberUsers = 0;
+  let numberAdmins = 0;
+
+  [...document.querySelector('#table-users').children].forEach(
+    tr => {
+    numberUsers++;
+    if (tr.children[3].innerText === 'Sim') {
+      numberAdmins++;
+    }
+  });
+
+  document.querySelector('#number-users').innerHTML = numberUsers;
+  document.querySelector('#number-users-admin').innerHTML = numberAdmins;
 }
 
 function getPhoto(formEl) {
